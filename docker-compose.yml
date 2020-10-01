@@ -1,13 +1,14 @@
 version: '3.4'
 
 services:
-    dtsocket:
-      network_mode: host
+    dtsocket:      
       container_name: DateTimeSocket
       build:
         network: host
         context: ./
       restart: always
       ports:
-          - "4333:4333"
-            
+          - target: 80
+            published: 8080
+            protocol: tcp
+            mode: host

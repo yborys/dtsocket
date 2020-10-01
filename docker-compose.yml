@@ -9,5 +9,5 @@ services:
         context: ./
       restart: always
       ports:
-          - 4333:4333
+          - "4333:4333"
             

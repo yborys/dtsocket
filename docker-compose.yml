@@ -7,7 +7,5 @@ services:
         context: ./
       restart: always
       ports:
-          - target: 4333
-            published: 4333
-            protocol: tcp
-            mode: host
+          - 4333:4333
+            

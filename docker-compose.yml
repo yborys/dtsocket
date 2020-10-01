@@ -1,9 +1,11 @@
-version: '3'
+version: '3.4'
 
 services:
     dtsocket:
+      network_mode: host
       container_name: DateTimeSocket
       build:
+        network: host
         context: ./
       restart: always
       ports:

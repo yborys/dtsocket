@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    dtsocket:
+      container_name: DataTimeSocket
+      build:
+        context: ./
+      restart: always
+      ports:
+          - target: 4333
+            published: 4333
+            protocol: tcp
+            mode: host

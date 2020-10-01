@@ -13,10 +13,10 @@ class TestClient:
         thread.start()
 
         while True:
-            data = self.sock.recv(4096)
+            data = self.sock.recv(1024)
             if not data:
                 break
-            self.logger.info(data.decode())
+            self.logger.info(data.hex())
 
     def send_message(self):
         while True:
@@ -37,4 +37,5 @@ class TestClient:
         return sock
 
 if __name__ == "__main__":
-    client = TestClient('localhost', 4333)
+    from dtsocket.settings import SERVER_HOST, SERVER_PORT
+    client = TestClient(SERVER_HOST, SERVER_PORT)

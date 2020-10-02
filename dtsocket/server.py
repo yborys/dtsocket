@@ -1,7 +1,8 @@
 from socket import socket, AF_INET, SOCK_STREAM
 import logging 
 import selectors
-import datetime
+from datetime import datetime
+import pytz
 import types
 
 
@@ -42,9 +43,10 @@ class TimeServer:
                 self.sel.unregister(sock)
                 sock.close()
         if mask & selectors.EVENT_WRITE:
-            if data.outb:
-                
-                now = datetime.datetime.now() 
+            if data.outb:                
+                uk = pytz.timezone('Europe/London')
+                now = datetime.now(uk)
+
                 ba = bytearray(6)
                 ba[0] = now.minute
                 ba[1] = now.hour

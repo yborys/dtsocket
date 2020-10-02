@@ -65,6 +65,6 @@ class TimeServer:
         return sock
 
 if __name__ == "__main__":
-    from dtsocket.settings import SERVER_HOST, SERVER_PORT
-    server = TimeServer(SERVER_HOST, SERVER_PORT)
+    #from dtsocket.settings import SERVER_HOST, SERVER_PORT
+    server = TimeServer('0.0.0.0', 4333)
     server.run()

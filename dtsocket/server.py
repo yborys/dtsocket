@@ -1,6 +1,7 @@
 from socket import socket, AF_INET, SOCK_STREAM
 import logging 
 import selectors
+import datetime
 import types
 
 
@@ -31,7 +32,7 @@ class TimeServer:
 
     def service_connection(self, key, mask):
         sock = key.fileobj
-        data = key.data
+        data = key.data        
         if mask & selectors.EVENT_READ:
             recv_data = sock.recv(1024)  # Should be ready to read
             if recv_data:
@@ -42,9 +43,20 @@ class TimeServer:
                 sock.close()
         if mask & selectors.EVENT_WRITE:
             if data.outb:
-                self.logger.info(f'echoing {repr(data.outb)} to {data.addr}')
-                sent = sock.send(data.outb)  # Should be ready to write
+                
+                now = datetime.datetime.now() 
+                ba = bytearray(6)
+                ba[0] = now.minute
+                ba[1] = now.hour
+                ba[2] = int(now.strftime('%w'))
+                ba[3] = now.day
+                ba[4] = now.month
+                ba[5] = int(now.strftime('%y'))
+                self.logger.info(f'sending datetime to {data.addr}')
+                sent = sock.send(ba)
                 data.outb = data.outb[sent:]
+                #sent = sock.send(data.outb)  # Should be ready to write
+                #data.outb = data.outb[sent:]
 
 
 

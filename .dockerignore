@@ -1,0 +1,6 @@
+venv
+*.md
+*/__pycache__
+*/client.py
+*/__init__.py
+*.egg-info

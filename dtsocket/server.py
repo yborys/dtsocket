@@ -4,6 +4,7 @@ import selectors
 from datetime import datetime
 import pytz
 import types
+import _settings 
 
 
 class TimeServer:
@@ -71,14 +72,13 @@ class TimeServer:
 
     @staticmethod
     def setup_socket(host, port):
-        sock = socket(AF_INET, SOCK_STREAM)
-        #sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+        sock = socket(AF_INET, SOCK_STREAM)        
         sock.bind((host, port))
         sock.listen()
         sock.setblocking(False)
-        return sock
+        return sock 
 
 if __name__ == "__main__":
     #from dtsocket.settings import SERVER_HOST, SERVER_PORT
-    server = TimeServer('0.0.0.0', 4333)
+    server = TimeServer(_settings.SERVER_HOST, _settings.SERVER_PORT)
     server.run()

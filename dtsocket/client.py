@@ -37,5 +37,5 @@ class TestClient:
         return sock
 
 if __name__ == "__main__":
-    from dtsocket.settings import SERVER_HOST, SERVER_PORT
-    client = TestClient(SERVER_HOST, SERVER_PORT)
+    #from dtsocket.settings import SERVER_HOST, SERVER_PORT
+    client = TestClient('localhost', 4333)

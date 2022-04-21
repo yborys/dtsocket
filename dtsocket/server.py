@@ -4,7 +4,7 @@ import selectors
 from datetime import datetime
 import pytz
 import types
-import _settings 
+from  _settings import SERVER_HOST, SERVER_PORT, TIMEZONE 
 
 
 class TimeServer:
@@ -45,7 +45,7 @@ class TimeServer:
                 sock.close()
         if mask & selectors.EVENT_WRITE:
             if data.outb:                
-                uk = pytz.timezone(_settings.TIMEZONE)
+                uk = pytz.timezone(TIMEZONE)
                 now = datetime.now(uk)
 
                 ba = bytearray(6)
@@ -80,5 +80,5 @@ class TimeServer:
 
 if __name__ == "__main__":
     #from dtsocket.settings import SERVER_HOST, SERVER_PORT
-    server = TimeServer(_settings.SERVER_HOST, _settings.SERVER_PORT)
+    server = TimeServer(SERVER_HOST, SERVER_PORT)
     server.run()

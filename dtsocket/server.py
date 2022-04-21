@@ -45,7 +45,7 @@ class TimeServer:
                 sock.close()
         if mask & selectors.EVENT_WRITE:
             if data.outb:                
-                uk = pytz.timezone('Europe/London')
+                uk = pytz.timezone(_settings.TIMEZONE)
                 now = datetime.now(uk)
 
                 ba = bytearray(6)
